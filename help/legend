@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechRay's App Genie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Header -->
+    <header class="bg-blue-600 p-6">
+        <div class="container mx-auto">
+            <h1 class="text-3xl text-white font-bold">TechRay's App Genie</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <!-- Legend Section -->
+        <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Legend</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">OpenAI API Key</h3>
+                    <p class="text-gray-700">A key required to access the AI features of the tool. Obtain it to enable functionality.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Reset</h3>
+                    <p class="text-gray-700">Resets the entire tool, including stored API keys and project history.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">New Project</h3>
+                    <p class="text-gray-700">Start a new project, even if a revision is currently open.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Clear Prompt</h3>
+                    <p class="text-gray-700">Resets the "Describe/Update" text field.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Download</h3>
+                    <p class="text-gray-700">Save a copy of your app to your computer as an HTML file.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Help</h3>
+                    <p class="text-gray-700">Access resources on how to use TechRay's App Genie.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Preview</h3>
+                    <p class="text-gray-700">Opens your app in a new window.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Mobile View</h3>
+                    <p class="text-gray-700">Changes the Live Preview size to a mobile layout.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Desktop View</h3>
+                    <p class="text-gray-700">Changes the Live Preview size to a desktop layout.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Update Preview</h3>
+                    <p class="text-gray-700">Updates the Live Preview window with the current code without saving it to the revision list.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Discard</h3>
+                    <p class="text-gray-700">Clears the current code.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Name Your App</h3>
+                    <p class="text-gray-700">Enter the name for your project or app.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Describe Your App</h3>
+                    <p class="text-gray-700">Use this text field for the initial description of your app.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Update Your App</h3>
+                    <p class="text-gray-700">Use this text field after making updates to your app.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Upload an Image</h3>
+                    <p class="text-gray-700">Optionally upload an image to accompany your text prompt for better clarity.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Generated Code</h3>
+                    <p class="text-gray-700">A collapsible menu to view and modify the raw code you generated.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Live Preview</h3>
+                    <p class="text-gray-700">A window displaying a live preview of your app.</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+                    <h3 class="text-lg font-semibold mb-2">Revision History</h3>
+                    <p class="text-gray-700">A list of projects and revisions you have created.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-6">
+        <div class="container mx-auto text-center text-blue-200">
+            &copy; 2024 TechRay's App Genie. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>
