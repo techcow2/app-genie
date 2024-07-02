@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechRay's App Genie - Text to App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <script defer src="https://umami.techray.dev/script.js" data-website-id="b59ef7cc-88b6-4367-a601-6b6f7cef8531"></script>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "mw1r697zas");
+    </script>
+    <!-- Favicon Links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://appgenie.live/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://appgenie.live/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://appgenie.live/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://appgenie.live/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://appgenie.live/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="https://appgenie.live/images/favicon/favicon.ico">
+    <meta property="og:image" content="https://appgenie.live/images/logo.webp" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="https://appgenie.live/images/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .info-container {
+            background-color: rgba(255, 255, 0, 0.3);
+            border-left: 4px solid yellow;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .info-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .iframe-container iframe {
+            background-color: #FFFFFF;
+        }
+        .gradient-title {
+            background: linear-gradient(to right, black, orange, blue);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-poppins">
+    <div class="max-w-7xl mx-auto p-6 bg-gray-900 shadow-md rounded-lg">
+        <header class="text-center py-6">
+            <h1 class="text-3xl font-bold gradient-title flex items-center justify-center">
+                <i class="fas fa-laptop-code mr-2"></i> TechRay's App Genie
+            </h1>
+        </header>
+        <nav class="flex flex-wrap justify-center gap-4 py-4 bg-gray-800 rounded-md shadow-inner">
+            <button id="generateButton" onclick="generateCode()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><i class="fas fa-magic mr-2"></i>Generate</button>
+            <button id="updateButton" onclick="updateCode()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 hidden"><i class="fas fa-sync-alt mr-2"></i>Update</button>
+            <button id="resetButton" onclick="resetTool()" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><i class="fas fa-trash-alt mr-2"></i>Reset</button>
+            <button id="newProjectButton" onclick="startNewProject()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><i class="fas fa-folder-plus mr-2"></i>New Project</button>
+            <button id="clearPromptButton" onclick="clearPrompt()" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><i class="fas fa-eraser mr-2"></i>Clear Prompt</button>
+            <button id="downloadButton" onclick="downloadCode()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"><i class="fas fa-download mr-2"></i>Download</button>
+            <div class="relative">
+                <button id="helpButton" onclick="toggleHelpDropdown()" class="py-2.5 px-5 mb-2 text-sm font-medium text-white focus:outline-none bg-orange-700 rounded-lg border border-orange-600 hover:bg-orange-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-orange-500"><i class="fas fa-question-circle mr-2"></i>Help</button>
+                <div id="helpDropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-10">
+                    <a href="javascript:void(0);" onclick="openHelpPage('https://appgenie.live/help')" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">API</a>
+                    <a href="javascript:void(0);" onclick="openHelpPage('https://appgenie.live/help/legend.html')" class="block px-4 py-2 text-sm text-white hover:bg-gray-700">Legend</a>
+                </div>
+            </div>
+            <button id="previewButton" onclick="previewInNewTab()" class="py-2.5 px-5 mb-2 text-sm font-medium text-white focus:outline-none bg-pink-700 rounded-lg border border-pink-600 hover:bg-pink-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-pink-500"><i class="fas fa-external-link-alt mr-2"></i>Preview</button>
+            <button id="highlightModeButton" onclick="toggleHighlightMode()" class="py-2.5 px-5 mb-2 text-sm font-medium text-white focus:outline-none bg-purple-700 rounded-lg border border-purple-600 hover:bg-purple-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-purple-500"><i class="fas fa-highlighter mr-2"></i>Highlight Mode</button>
+            <button id="mobileViewButton" onclick="setMobileView()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Mobile View</button>
+            <button id="desktopViewButton" onclick="setDesktopView()" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Desktop View</button>
+        </nav>
+        <main class="mt-6">
+            <div id="infoContainer" class="info-container hidden">
+                <div class="info-title">Information:</div>
+                <div id="infoContent"></div>
+            </div>
+            <section class="mb-6">
+                <div class="mb-4">
+                    <label for="projectName" class="block text-lg font-medium">Name your app:</label>
+                    <input type="text" id="projectName" class="w-full px-4 py-2 border border-gray-700 bg-gray-800 rounded-md text-white">
+                </div>
+                <div class="mb-4">
+                    <label for="prompt" id="promptLabel" class="block text-lg font-medium">Describe your app:</label>
+                    <textarea id="prompt" class="w-full px-4 py-2 border border-gray-700 bg-gray-800 rounded-md text-white"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="image" class="block text-lg font-medium">Upload an image (optional):</label>
+                    <input type="file" id="image" accept="image/*" class="w-full px-4 py-2 border border-gray-700 bg-gray-800 rounded-md text-white">
+                    <div id="uploadStatus" class="mt-2 text-sm text-gray-400"></div>
+                </div>
+                <input type="hidden" id="imageInfo">
+            </section>
+            <section class="mb-6">
+                <h2 class="text-2xl font-bold mb-4">Generated Code:</h2>
+                <div class="collapsible">
+                    <button class="collapsible-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 flex items-center justify-between w-full" onclick="toggleCollapsible('codeOutputContainer')">
+                        <span>Expand Code</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="codeOutputContainer" class="hidden">
+                        <textarea id="codeOutput" class="w-full h-96 mt-4 px-4 py-2 border border-gray-700 bg-gray-800 rounded-md font-mono resize-none text-white"></textarea>
+                        <div id="syntaxError" class="text-red-500 mt-2 hidden">Syntax Error: Line <span id="errorLine"></span></div>
+                        <div class="code-actions mt-4 flex gap-4">
+                            <button onclick="updatePreview()" id="previewButton" class="focus:outline-none text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Update Preview</button>
+                            <button onclick="saveCodeModification()" id="saveButton" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Save</button>
+                            <button onclick="discardCodeModification()" id="discardButton" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Discard</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mb-6">
+                <h2 class="text-2xl font-bold mb-4">Live Preview:</h2>
+                <div class="collapsible">
+                    <button class="collapsible-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 flex items-center justify-between w-full" onclick="toggleCollapsible('iframeContainer')">
+                        <span>Expand Preview</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="iframeContainer" class="iframe-container border border-gray-700 bg-gray-800 rounded-md overflow-hidden mt-4 hidden" style="height: 800px;">
+                        <iframe id="preview" class="w-full h-full"></iframe>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2 class="text-2xl font-bold mb-4">Revision History:</h2>
+                <ul id="historyList" class="space-y-4 bg-gray-900 text-white"></ul>
+            </section>
+        </main>
+        <footer class="text-center py-6 bg-gray-800 text-white mt-6">
+            <p>Developed by TechRay Apps LLC</p>
+            <p>
+                <a href="https://appgenie.live/privacy.html" target="_blank" class="text-blue-400 hover:text-blue-500">Privacy Policy</a> |
+                <a href="https://appgenie.live/terms.html" target="_blank" class="text-blue-400 hover:text-blue-500">Terms and Conditions</a>
+            </p>
+        </footer>
+    </div>
+
+    <div id="loadingModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center text-white">
+            <i class="fas fa-spinner fa-spin text-3xl mb-4"></i>
+            <p>Generating code, please wait...</p>
+        </div>
+    </div>
+
+    <div id="apiKeyModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center text-white">
+            <h2 class="text-xl font-bold mb-4">Enter OpenAI API Key</h2>
+            <input type="text" id="apiKeyInput" placeholder="Enter your OpenAI API key" class="w-full px-4 py-2 border border-gray-700 bg-gray-800 rounded-md mb-4 text-white">
+            <button onclick="submitApiKey()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Submit</button>
+        </div>
+    </div>
+
+    <div id="helpModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center max-w-lg w-full text-white">
+            <span class="close text-gray-400 cursor-pointer float-right text-xl" onclick="toggleHelpModal()">&times;</span>
+            <h2 class="text-xl font-bold mb-4">Help Information</h2>
+            <p>After launching the initial version of your app, you can continue refining it by adding new features, fixing bugs, and making other enhancements. You have two options for updating your app: using the natural language input field or manually editing the code.</p>
+            <p>Upon completing the first revision, the 'Generate' button will transform into an 'Update' button. You might need several revisions to achieve your desired results.</p>
+            <p>If you want to integrate an API, simply paste the API documentation into the natural language input field. Should your app encounter issues after a revision, use prompts starting with "Fix the problem" followed by a detailed description of the issue. Including the browser console error can be especially helpful; prefix the error message with "Console error:".</p>
+            <p>Additionally, you can customize the font and overall theme of your app by entering prompts such as "Change the font of the entire app to Poppins" or "I would like a blue and red theme for my app".</p>
+        </div>
+    </div>
+
+    <div id="confirmationModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center max-w-lg w-full text-white">
+            <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+            <p>Are you sure you want to delete this revision?</p>
+            <div class="mt-4 flex justify-center gap-4">
+                <button id="confirmDeleteButton" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2">Delete</button>
+                <button onclick="closeConfirmationModal()" class="py-2.5 px-5 mb-2 text-sm font-medium text-white focus:outline-none bg-gray-700 rounded-lg border border-gray-600 hover:bg-gray-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-500">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/edit/matchbrackets.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
