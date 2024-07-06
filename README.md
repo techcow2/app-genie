@@ -18,8 +18,8 @@ This repository contains the source code for a front-end web application built u
 
 To get started with the project, simply clone the repository and open `index.html` in your preferred web browser.
 
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/techcow2/app-genie
+cd app-genie
 open index.html
 Dependencies
 This project uses the following dependencies:
