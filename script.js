@@ -39,7 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listener to file input
     document.getElementById('image').addEventListener('change', handleImageUpload);
 
+    // Add event listener to the delete confirmation button
+    const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+    confirmDeleteButton.addEventListener('click', () => {
+        if (projectIndexToDelete !== null && revisionIndexToDelete !== null) {
+            deleteRevision(projectIndexToDelete, revisionIndexToDelete);
+            closeConfirmationModal();
+        }
+    });
+
     resetUI(); // Call resetUI after CodeMirror is initialized
+
+    // Adjust toolbar buttons on window resize
+    window.addEventListener('resize', adjustToolbarButtons);
+    adjustToolbarButtons(); // Initial call
 });
 
 function refreshCodeMirror() {
@@ -211,6 +224,10 @@ async function generateCode() {
                 document.getElementById('updateButton').style.display = 'inline-block';
                 document.getElementById('prompt').value = ''; // Clear the prompt field
                 document.getElementById('promptLabel').textContent = 'Update your app:'; // Change the label text
+                
+                // Automatically expand Generated Code and Live Preview sections
+                ensureSectionExpanded('codeOutputContainer');
+                ensureSectionExpanded('iframeContainer');
             } else {
                 throw new Error('No code generated. Please check your prompt and try again.');
             }
@@ -407,7 +424,7 @@ function updateHistoryList() {
 
             const revisionInfo = document.createElement('div');
             revisionInfo.classList.add('flex-grow', 'mr-4', 'truncate');
-            revisionInfo.textContent = `Prompt: ${revision.prompt}`;
+            revisionInfo.textContent = revision.prompt; // Only display the actual prompt
 
             const starButton = document.createElement('button');
             starButton.innerHTML = revision.starred ? '<i class="fas fa-star text-yellow-500"></i>' : '<i class="far fa-star text-yellow-500"></i>';
@@ -615,9 +632,9 @@ function downloadCode() {
     URL.revokeObjectURL(url);
 }
 
-function toggleHelpModal() {
-    var modal = document.getElementById('helpModal');
-    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+function toggleHelpDropdown() {
+    const dropdown = document.getElementById('helpDropdown');
+    dropdown.classList.toggle('hidden');
 }
 
 function clearPrompt() {
@@ -730,11 +747,23 @@ function checkSyntax() {
     }
 }
 
-function toggleHelpDropdown() {
-    const dropdown = document.getElementById('helpDropdown');
-    dropdown.classList.toggle('hidden');
+function adjustToolbarButtons() {
+    const toolbar = document.querySelector('.toolbar');
+    if (window.innerWidth <= 768) {
+        toolbar.style.flexDirection = 'column';
+        toolbar.style.alignItems = 'center';
+    } else {
+        toolbar.style.flexDirection = 'row';
+        toolbar.style.alignItems = 'initial';
+    }
 }
 
-function openHelpPage(url) {
-    window.location.href = url;
+function copyToClipboard() {
+    const code = codeMirrorEditor.getValue();
+    navigator.clipboard.writeText(code).then(() => {
+        alert('Copied to clipboard successfully.');
+    }).catch(err => {
+        alert('Failed to copy to clipboard.');
+        console.error('Error:', err);
+    });
 }
