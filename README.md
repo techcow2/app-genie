@@ -39,7 +39,7 @@ To get a local copy up and running, follow these steps:
 
 The screenshot below shows an example of using TechRay's App Genie:
 
-![TechRay's App Genie](path_to_screenshot.png)
+![TechRay's App Genie](/images/screenshot2.png)
 
 The example demonstrates the app's capability to generate a complete mobile-first web app with interactive features and enhanced UI using HTML, JavaScript, and Tailwind CSS.
 
