@@ -56,4 +56,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Credits
 
-- List any third-party resources, libraries, or tools you used here.
+- Inspired by https://picoapps.xyz
