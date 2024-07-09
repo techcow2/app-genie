@@ -53,6 +53,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Screenshots
 
 ![Logo](images/screenshot.png)
+![Logo](images/screenshot2.png)
 
 ## Credits
 
