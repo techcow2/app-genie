@@ -52,7 +52,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Screenshots
 
-![Logo](images/Screenshot 2024-07-08 225505.png)
+![Logo](images/screenshot.png)
 
 ## Credits
 
