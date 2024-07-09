@@ -1,7 +1,3 @@
-Got it. Here’s the revised README without mentioning Tic Tac Toe:
-
----
-
 # TechRay's App Genie
 
 ## Project Description
