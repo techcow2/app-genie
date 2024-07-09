@@ -1,15 +1,19 @@
-# App Genie
+Got it. Here’s the revised README without mentioning Tic Tac Toe:
+
+---
+
+# TechRay's App Genie
 
 ## Project Description
 
-App Genie is a ChatGPT front end designed for HTML, JavaScript, and CSS developers. It offers an interactive interface to enhance the development experience.
+TechRay's App Genie is a versatile web-based application designed to help HTML, JavaScript, and CSS developers quickly prototype and generate code for their projects. The app provides an intuitive interface for creating and previewing web applications, including a mobile-first design approach.
 
 ## Features
 
-- User-friendly interface
-- Interactive help section
-- Customizable favicon support
-- Detailed project documentation
+- Interactive code generation for HTML, JavaScript, and CSS projects
+- Real-time live preview of the generated code
+- Option to upload images for use in the app
+- Responsive design ensuring compatibility across different devices
 
 ## Installation
 
@@ -26,15 +30,18 @@ To get a local copy up and running, follow these steps:
 
 ## Usage
 
-Open `index.html` in your preferred web browser to start using the application. The main interface is intuitive and provides easy navigation to all features.
+1. Open `index.html` in your preferred web browser to start using the application.
+2. Use the interface to name your app, update your app content, and optionally upload images.
+3. The generated code will be displayed in the "Generated Code" section.
+4. Use the "Live Preview" section to see how your app will look in real time.
 
-### Running the Application
+### Example Usage
 
-To view the application locally, open the `index.html` file in your browser.
+The screenshot below shows an example of using TechRay's App Genie:
 
-### Help
+![TechRay's App Genie](path_to_screenshot.png)
 
-Detailed help documentation is available in the `help` directory. Open `help/index.html` for more information.
+The example demonstrates the app's capability to generate a complete mobile-first web app with interactive features and enhanced UI using HTML, JavaScript, and Tailwind CSS.
 
 ## Contributing
 
@@ -49,10 +56,6 @@ Contributions are what make the open source community such an amazing place to l
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## Screenshots
-
-![Logo](images/screenshot2.png)
 
 ## Credits
 
