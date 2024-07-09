@@ -2,7 +2,7 @@
 
 ## Project Description
 
-App Genie is a web-based application designed to provide users with a seamless and interactive experience. The project includes a main web interface and various support files to enhance user interaction and usability.
+App Genie is a ChatGPT front end designed for HTML, JavaScript, and CSS developers. It offers an interactive interface to enhance the development experience.
 
 ## Features
 
