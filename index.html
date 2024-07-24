@@ -9,54 +9,77 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
-    <script defer src="https://umami.techray.dev/script.js" data-website-id="b59ef7cc-88b6-4367-a601-6b6f7cef8531"></script>
-    <!-- Favicon Links -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://appgenie.live/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://appgenie.live/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://appgenie.live/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="https://appgenie.live/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="https://appgenie.live/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="https://appgenie.live/images/favicon/favicon.ico">
-    <meta property="og:image" content="https://appgenie.live/images/logo.webp" />
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="https://appgenie.live/images/favicon/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
     <style>
-        .info-container {
-            background-color: rgba(255, 255, 0, 0.3);
-            border-left: 4px solid yellow;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        .info-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        .iframe-container iframe {
-            background-color: #FFFFFF;
-        }
-        .gradient-title {
-            background: linear-gradient(to right, black, orange, blue);
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+    .info-container {
+        background-color: rgba(255, 255, 0, 0.3);
+        border-left: 4px solid yellow;
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    .info-title {
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .iframe-container iframe {
+        background-color: #FFFFFF;
+    }
+    .gradient-title {
+        background: linear-gradient(to right, white, orange);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    .toolbar {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    .toolbar-left, .toolbar-right {
+        display: flex;
+        gap: 0.5rem;
+        flex: 1;
+    }
+    .toolbar button {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 0 10px; /* Increased padding */
+        font-size: 14px;
+        text-align: center; /* Ensure text is centered */
+    }
+    .toolbar button i {
+        margin-right: 5px;
+    }
+    .tooltip {
+        display: none;
+    }
+    @media (max-width: 768px) {
         .toolbar {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            flex-direction: column;
+            align-items: stretch;
         }
         .toolbar-left, .toolbar-right {
-            display: flex;
-            gap: 0.5rem;
+            flex-direction: column;
+            align-items: stretch;
         }
         .toolbar button {
-            width: 50px;
+            width: 100%;
             height: 50px;
-            position: relative;
+            margin: 0.5rem 0;
+            padding: 0 10px; /* Increased padding for mobile */
+        }
+        .toolbar button span:not(.tooltip) {
+            display: none;
+        }
+        .toolbar button i {
+            margin-right: 0;
         }
         .tooltip {
-            display: none;
+            display: block;
             position: absolute;
             bottom: 60px;
             left: 50%;
@@ -68,37 +91,45 @@
             white-space: nowrap;
             z-index: 10;
         }
-        .toolbar button:hover .tooltip {
-            display: block;
-        }
-        @media (max-width: 768px) {
-            .toolbar {
-                flex-direction: column;
-                align-items: center;
-            }
-            .toolbar-left, .toolbar-right {
-                justify-content: center;
-            }
-            .toolbar button {
-                margin: 0.5rem;
-            }
-        }
-        #helpDropdown {
-            z-index: 50; /* Ensure dropdown is on top of other elements */
-        }
-        #helpDropdown a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: black;
-            text-decoration: none;
-        }
-        #helpDropdown a:hover {
-            background-color: #e2e8f0;
-        }
-    </style>
+    }
+    #helpDropdown {
+        z-index: 50;
+    }
+    #helpDropdown a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: black;
+        text-decoration: none;
+    }
+    #helpDropdown a:hover {
+        background-color: #e2e8f0;
+    }
+    #mobileWarningModal {
+        display: none; /* Initially hidden */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+</style>
+
 </head>
 <body class="bg-black text-white font-poppins">
-    <div class="relative max-w-7xl mx-auto p-6 bg-gray-900 shadow-md rounded-lg">
+    <div id="mobileWarningModal">
+        <div>
+            <h1 class="text-3xl font-bold mb-4">Optimized for Desktop and Laptop</h1>
+            <p>This application is optimized for desktop and laptop computers. Please open it on a larger screen for the best experience.</p>
+        </div>
+    </div>
+    <div id="mainApp" class="relative max-w-7xl mx-auto p-6 bg-gray-900 shadow-md rounded-lg">
         <header class="text-center py-6">
             <h1 class="text-3xl font-bold gradient-title flex items-center justify-center">
                 <i class="fas fa-laptop-code mr-2"></i> TechRay's App Genie
@@ -108,26 +139,32 @@
             <div class="toolbar-left">
                 <button id="generateButton" onclick="generateCode()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-magic"></i>
+                    <span>Generate</span>
                     <span class="tooltip">Generate</span>
                 </button>
                 <button id="updateButton" onclick="updateCode()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm hidden">
                     <i class="fas fa-sync-alt"></i>
+                    <span>Update</span>
                     <span class="tooltip">Update</span>
                 </button>
                 <button id="resetButton" onclick="resetTool()" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-trash-alt"></i>
+                    <span>Reset</span>
                     <span class="tooltip">Reset</span>
                 </button>
-                <button id="newProjectButton" onclick="startNewProject()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm">
+                <button id="newProjectButton" onclick="startNewProject()" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-folder-plus"></i>
+                    <span>New Project</span>
                     <span class="tooltip">New Project</span>
                 </button>
                 <button id="clearPromptButton" onclick="clearPrompt()" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-eraser"></i>
+                    <span>Clear Prompt</span>
                     <span class="tooltip">Clear Prompt</span>
                 </button>
-                <button id="helpButton" onclick="toggleHelpDropdown()" class="focus:outline-none text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm relative">
+                <button id="helpButton" onclick="toggleHelpDropdown()" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm relative">
                     <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
                     <span class="tooltip">Help</span>
                     <div id="helpDropdown" class="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg hidden">
                         <a href="https://appgenie.live/help/" target="_blank">API Key</a>
@@ -138,22 +175,27 @@
             <div class="toolbar-right">
                 <button id="downloadButton" onclick="downloadCode()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-download"></i>
+                    <span>Download</span>
                     <span class="tooltip">Download</span>
                 </button>
-                <button id="previewButton" onclick="previewInNewTab()" class="py-2.5 text-sm font-medium text-white focus:outline-none bg-pink-700 rounded-lg border border-pink-600 hover:bg-pink-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-pink-500">
+                <button id="previewButton" onclick="previewInNewTab()" class="focus:outline-none text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-external-link-alt"></i>
+                    <span>Preview</span>
                     <span class="tooltip">Preview</span>
                 </button>
-                <button id="highlightModeButton" onclick="toggleHighlightMode()" class="py-2.5 text-sm font-medium text-white focus:outline-none bg-purple-700 rounded-lg border border-purple-600 hover:bg-purple-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-purple-500">
+                <button id="highlightModeButton" onclick="toggleHighlightMode()" class="focus:outline-none text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-highlighter"></i>
+                    <span>Highlight</span>
                     <span class="tooltip">Highlight</span>
                 </button>
-                <button id="mobileViewButton" onclick="setMobileView()" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm">
+                <button id="mobileViewButton" onclick="setMobileView()" class="focus:outline-none text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile View</span>
                     <span class="tooltip">Mobile View</span>
                 </button>
-                <button id="desktopViewButton" onclick="setDesktopView()" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm">
+                <button id="desktopViewButton" onclick="setDesktopView()" class="focus:outline-none text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 font-medium rounded-lg text-sm">
                     <i class="fas fa-desktop"></i>
+                    <span>Desktop View</span>
                     <span class="tooltip">Desktop View</span>
                 </button>
             </div>
@@ -177,7 +219,7 @@
             </section>
             <div id="infoContainer" class="info-container hidden">
                 <div class="info-title">Information:</div>
-                <div id="infoContent">Toolbar buttons have been moved to the left and right edges, and symbols are used instead of text labels.</div>
+                <div id="infoContent"></div>
             </div>
             <section class="mb-6">
                 <h2 class="text-2xl font-bold mb-4">Generated Code:</h2>
@@ -216,9 +258,15 @@
             </section>
         </main>
         <footer class="text-center py-6 bg-gray-800 text-white mt-6">
-            <p>Developed by TechRay Apps LLC</p>
-               <a href="https://github.com/techcow2/app-genie/blob/main/LICENSE" target="_blank" class="text-blue-400 hover:text-blue-500">GitHub</a> 
-           </p>
+            <p>
+                <a href="https://github.com/techcow2/app-genie/blob/main/LICENSE" target="_blank" class="text-blue-400 hover:text-blue-500">GitHub</a>
+            </p>
+            <p>
+                <a href="https://techray.dev" target="_blank" class="text-blue-400 hover:text-blue-500">Developed by TechRay Apps LLC</a>
+            </p>
+            <p>
+                <a href="https://picoapps.xyz" target="_blank" class="text-blue-400 hover:text-blue-500">Inspired by Pico</a>
+            </p>
         </footer>
     </div>
 
