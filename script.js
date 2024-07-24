@@ -53,6 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adjust toolbar buttons on window resize
     window.addEventListener('resize', adjustToolbarButtons);
     adjustToolbarButtons(); // Initial call
+
+    // Check if the app should be displayed based on window size
+    checkWindowSize();
+    window.addEventListener('resize', checkWindowSize); // Recheck on window resize
 });
 
 function refreshCodeMirror() {
@@ -751,7 +755,7 @@ function adjustToolbarButtons() {
     const toolbar = document.querySelector('.toolbar');
     if (window.innerWidth <= 768) {
         toolbar.style.flexDirection = 'column';
-        toolbar.style.alignItems = 'center';
+        toolbar.style.alignItems = 'stretch';
     } else {
         toolbar.style.flexDirection = 'row';
         toolbar.style.alignItems = 'initial';
@@ -766,4 +770,14 @@ function copyToClipboard() {
         alert('Failed to copy to clipboard.');
         console.error('Error:', err);
     });
+}
+
+function checkWindowSize() {
+    if (window.innerWidth < 1024) {
+        document.getElementById('mainApp').style.display = 'none';
+        document.getElementById('mobileWarningModal').style.display = 'flex';
+    } else {
+        document.getElementById('mainApp').style.display = 'block';
+        document.getElementById('mobileWarningModal').style.display = 'none';
+    }
 }
